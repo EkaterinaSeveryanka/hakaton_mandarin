@@ -43,10 +43,3 @@ def predict_bank_decision(data: BankDecisionInput, response: Response):
         ValueError: If the input data is not valid.
         TypeError: If the input data is not of the correct type.
     """
-    try:
-        result = predict(data=data.model_dump())
-        # Return the prediction as a response
-        return BankDecisionOutput(bank_a=result["bank_a"], bank_b=result["bank_b"], bank_c=result["bank_c"], bank_d=result["bank_d"], bank_e=result["bank_e"])
-    except (ValueError, TypeError) as e:
-        response.status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
-        return InvalidInputError(error=str(e))
